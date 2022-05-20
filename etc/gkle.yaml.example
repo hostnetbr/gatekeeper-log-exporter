@@ -1,0 +1,10 @@
+gk_log_dir: ""
+
+influxdb:
+  url:              ""
+  user:             ""
+  password:         ""
+  database:         ""
+  retention_policy: ""
+  log_level:        0
+  hostname:         ""
