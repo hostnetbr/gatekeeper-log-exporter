@@ -22,7 +22,7 @@ const (
 	timeLayout  = "2006-01-02 15:04:05"
 )
 
-var logLineRegex = regexp.MustCompile(`^GK\/(\d+):\s+Basic\s+measurements\s+at\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\s+\[tot_pkts_num\s+=\s+(\d+),\s+tot_pkts_size\s+=\s+(\d+),\s+pkts_num_granted\s+=\s+(\d+),\s+pkts_size_granted\s+=\s+(\d+),\s+pkts_num_request\s+=\s+(\d+),\s+pkts_size_request\s+=\s+(\d+),\s+pkts_num_declined\s+=\s+(\d+),\s+pkts_size_declined\s+=\s+(\d+),\s+tot_pkts_num_dropped\s+=\s+(\d+),\s+tot_pkts_size_dropped\s+=\s+(\d+),\s+tot_pkts_num_distributed\s+=\s+(\d+),\s+tot_pkts_size_distributed\s+=\s+(\d+)\]$`)
+var logLineRegex = regexp.MustCompile(`^GK\/(\d+)\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\s+NOTICE\s+Basic\s+measurements\s+\[tot_pkts_num\s+=\s+(\d+),\s+tot_pkts_size\s+=\s+(\d+),\s+pkts_num_granted\s+=\s+(\d+),\s+pkts_size_granted\s+=\s+(\d+),\s+pkts_num_request\s+=\s+(\d+),\s+pkts_size_request\s+=\s+(\d+),\s+pkts_num_declined\s+=\s+(\d+),\s+pkts_size_declined\s+=\s+(\d+),\s+tot_pkts_num_dropped\s+=\s+(\d+),\s+tot_pkts_size_dropped\s+=\s+(\d+),\s+tot_pkts_num_distributed\s+=\s+(\d+),\s+tot_pkts_size_distributed\s+=\s+(\d+),\s+flow_table_occupancy\s+=\s+(\d+)\/(\d+)=\d+\.\d+%]`)
 var logFileRegex = regexp.MustCompile(`gatekeeper_\d{4}_\d{2}_\d{2}_\d{2}_\d{2}.log`)
 
 func main() {
@@ -63,7 +63,7 @@ func run() int {
 						parseLogFile(file, ex)
 						ex.Close()
 
-						if saveLastLog(file); err != nil {
+						if err := saveLastLog(file); err != nil {
 							fmt.Fprintf(os.Stderr, "error saving last read log: %v", err)
 							return
 						}
@@ -196,18 +196,20 @@ func parseEntry(line string) (exporter.Entry, error) {
 	}
 
 	measurements := exporter.Measurements{
-		TotPktsNum:             mustParseUint(matches[3]),
-		TotPktsSize:            mustParseUint(matches[4]),
-		PktsNumGranted:         mustParseUint(matches[5]),
-		PktsSizeGranted:        mustParseUint(matches[6]),
-		PktsNumRequest:         mustParseUint(matches[7]),
-		PktsSizeRequest:        mustParseUint(matches[8]),
-		PktsNumDeclined:        mustParseUint(matches[9]),
-		PktsSizeDeclined:       mustParseUint(matches[10]),
-		TotPktsNumDropped:      mustParseUint(matches[11]),
-		TotPktsSizeDropped:     mustParseUint(matches[12]),
-		TotPktsNumDistributed:  mustParseUint(matches[13]),
-		TotPktsSizeDistributed: mustParseUint(matches[14]),
+		TotPktsNum:               mustParseUint(matches[3]),
+		TotPktsSize:              mustParseUint(matches[4]),
+		PktsNumGranted:           mustParseUint(matches[5]),
+		PktsSizeGranted:          mustParseUint(matches[6]),
+		PktsNumRequest:           mustParseUint(matches[7]),
+		PktsSizeRequest:          mustParseUint(matches[8]),
+		PktsNumDeclined:          mustParseUint(matches[9]),
+		PktsSizeDeclined:         mustParseUint(matches[10]),
+		TotPktsNumDropped:        mustParseUint(matches[11]),
+		TotPktsSizeDropped:       mustParseUint(matches[12]),
+		TotPktsNumDistributed:    mustParseUint(matches[13]),
+		TotPktsSizeDistributed:   mustParseUint(matches[14]),
+		FlowTableOcupancyCurrent: mustParseUint(matches[15]),
+		FlowTableOcupancyMax:     mustParseUint(matches[16]),
 	}
 
 	entry := exporter.Entry{
@@ -246,6 +248,8 @@ func aggregate(entries map[int]exporter.Entry) (time.Time, exporter.Measurements
 		aggr.TotPktsSizeDropped += m.TotPktsSizeDropped
 		aggr.TotPktsNumDistributed += m.TotPktsNumDistributed
 		aggr.TotPktsSizeDistributed += m.TotPktsSizeDistributed
+		aggr.FlowTableOcupancyCurrent += m.FlowTableOcupancyCurrent
+		aggr.FlowTableOcupancyMax += m.FlowTableOcupancyMax
 	}
 	return time, aggr
 }

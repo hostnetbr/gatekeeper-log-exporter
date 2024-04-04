@@ -43,7 +43,7 @@ func (e Exporter) Export(t time.Time, m *exporter.Measurements) error {
 	writeAPI := e.client.WriteAPIBlocking("", fmt.Sprintf("%s/%s", e.config.Database, e.config.RetentionPolicy))
 	err := writeAPI.WritePoint(context.Background(), p)
 	if err != nil {
-		return fmt.Errorf("error writing to influxdb: %w\n", err)
+		return fmt.Errorf("error writing to influxdb: %w", err)
 	}
 
 	return nil
@@ -70,6 +70,8 @@ func measurementsToMap(ms *exporter.Measurements) map[string]interface{} {
 	m["tot_pkts_size_dropped"] = int64(ms.TotPktsSizeDropped)
 	m["tot_pkts_num_distributed"] = int64(ms.TotPktsNumDistributed)
 	m["tot_pkts_size_distributed"] = int64(ms.TotPktsSizeDistributed)
+	m["flow_table_ocupancy_current"] = int64(ms.FlowTableOcupancyCurrent)
+	m["flow_table_ocupancy_max"] = int64(ms.FlowTableOcupancyMax)
 
 	return m
 }
