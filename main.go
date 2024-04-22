@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -39,6 +40,9 @@ func run() int {
 	if cfg.LogLineRegex != "" {
 		logLineRegex = regexp.MustCompile(cfg.LogLineRegex)
 	}
+
+	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+	slog.SetDefault(logger)
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
@@ -102,6 +106,7 @@ func getFilesToParse(path string) ([]string, error) {
 	lastParsedLog, err := os.ReadFile(lastLogFile)
 	if err != nil {
 		if os.IsNotExist(err) {
+			slog.Debug("parsing all log files")
 			parseAll = true
 		} else {
 			return nil, fmt.Errorf("error reading last log file: %w", err)
@@ -130,6 +135,8 @@ func getFilesToParse(path string) ([]string, error) {
 }
 
 func parseLogFile(filename string, ex exporter.Interface) error {
+	slog.Debug(fmt.Sprintf("parsing log file %s", filename))
+
 	logFile, err := os.Open(filename)
 	if err != nil {
 		return fmt.Errorf("error opening log file: %w", err)
