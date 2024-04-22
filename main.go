@@ -276,7 +276,7 @@ func saveLastLog(logFile string) error {
 	if err := safeWrite(tmp, logFile); err != nil {
 		return fmt.Errorf("safe write failed: %w", err)
 	}
-	if err := os.Rename(tmp, logFile); err != nil {
+	if err := os.Rename(tmp, lastLogFile); err != nil {
 		return fmt.Errorf("rename failed: %w", err)
 	}
 	if err := dir.Sync(); err != nil {
