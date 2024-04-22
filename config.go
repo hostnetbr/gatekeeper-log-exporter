@@ -9,8 +9,9 @@ import (
 )
 
 type Config struct {
-	GkLogDir string         `yaml:"gk_log_dir"`
-	InfluxDB *influx.Config `yaml:"influxdb"`
+	GkLogDir     string         `yaml:"gk_log_dir"`
+	LogLineRegex string         `yaml:"log_line_regex"`
+	InfluxDB     *influx.Config `yaml:"influxdb"`
 }
 
 func parseConfig() (Config, error) {

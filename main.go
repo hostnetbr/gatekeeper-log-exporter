@@ -36,6 +36,10 @@ func run() int {
 		return 1
 	}
 
+	if cfg.LogLineRegex != "" {
+		logLineRegex = regexp.MustCompile(cfg.LogLineRegex)
+	}
+
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error creating fsnotify watcher: %v\n", err)
