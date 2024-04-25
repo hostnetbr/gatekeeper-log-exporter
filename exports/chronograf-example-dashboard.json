@@ -1,26 +1,158 @@
 {
 	"meta": {
-		"chronografVersion": "1.9.1",
+		"chronografVersion": "1.8.5",
 		"sources": {
-			"1": {
+			"2": {
 				"name": "Influx 1",
-				"link": "/chronograf/v1/sources/1"
+				"link": "/chronograf/v1/sources/2"
 			}
 		}
 	},
 	"dashboard": {
-		"id": "3",
+		"id": "21",
 		"cells": [
 			{
-				"i": "24e7411f-bc42-4e3a-81ae-50bfc0822858",
+				"i": "a9820256-de9a-405b-9650-42f5e0ca909a",
+				"x": 6,
+				"y": 15,
+				"w": 6,
+				"h": 3,
+				"name": "Flow Table Occupancy",
+				"queries": [
+					{
+						"query": "SELECT \"flow_table_ocupancy_max\", \"flow_table_ocupancy_current\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE time > :dashboardTime: AND time < :upperDashboardTime: AND \"host\"='gtk1.f1.k8.com.br'",
+						"queryConfig": {
+							"database": "gkle",
+							"measurement": "gkle",
+							"retentionPolicy": "gkle_monitor",
+							"fields": [
+								{
+									"value": "flow_table_ocupancy_max",
+									"type": "field",
+									"alias": ""
+								},
+								{
+									"value": "flow_table_ocupancy_current",
+									"type": "field",
+									"alias": ""
+								}
+							],
+							"tags": {
+								"host": [
+									"gtk1.f1.k8.com.br"
+								]
+							},
+							"groupBy": {
+								"time": "",
+								"tags": []
+							},
+							"areTagsAccepted": true,
+							"rawText": null,
+							"range": null,
+							"shifts": null
+						},
+						"source": "",
+						"type": "influxql"
+					}
+				],
+				"axes": {
+					"x": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					},
+					"y2": {
+						"bounds": [
+							"",
+							""
+						],
+						"label": "",
+						"prefix": "",
+						"suffix": "",
+						"base": "10",
+						"scale": "linear"
+					}
+				},
+				"type": "line",
+				"colors": [
+					{
+						"id": "a9e8768c-cfee-4455-8017-81e8d0cb6f16",
+						"type": "scale",
+						"hex": "#31C0F6",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "08f1a298-0749-4c24-9aa4-97da2867510d",
+						"type": "scale",
+						"hex": "#A500A5",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					},
+					{
+						"id": "6b60f9a2-2193-488a-824e-6bccc1cbd20c",
+						"type": "scale",
+						"hex": "#FF7E27",
+						"name": "Nineteen Eighty Four",
+						"value": "0"
+					}
+				],
+				"legend": {},
+				"tableOptions": {
+					"verticalTimeAxis": true,
+					"sortBy": {
+						"internalName": "time",
+						"displayName": "",
+						"visible": true
+					},
+					"wrapping": "truncate",
+					"fixFirstColumn": true
+				},
+				"fieldOptions": [
+					{
+						"internalName": "time",
+						"displayName": "",
+						"visible": true
+					}
+				],
+				"timeFormat": "MM/DD/YYYY HH:mm:ss",
+				"decimalPlaces": {
+					"isEnforced": true,
+					"digits": 2
+				},
+				"note": "",
+				"noteVisibility": "default",
+				"links": {
+					"self": "/chronograf/v1/dashboards/21/cells/a9820256-de9a-405b-9650-42f5e0ca909a"
+				}
+			},
+			{
+				"i": "0e75b061-2d24-4163-883a-84318aef1597",
 				"x": 9,
-				"y": 8,
+				"y": 12,
 				"w": 3,
-				"h": 4,
+				"h": 3,
 				"name": "Total Packets Size Distributed",
 				"queries": [
 					{
-						"query": "SELECT \"tot_pkts_size_distributed\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"tot_pkts_size_distributed\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -32,7 +164,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"tot_pkts_size_distributed\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"tot_pkts_size_distributed\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -125,19 +257,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/24e7411f-bc42-4e3a-81ae-50bfc0822858"
+					"self": "/chronograf/v1/dashboards/21/cells/0e75b061-2d24-4163-883a-84318aef1597"
 				}
 			},
 			{
-				"i": "97c93e38-b408-43a8-b137-5247451095ea",
+				"i": "5dbbd3e2-f54d-42f0-9bce-33ba3cd9a127",
 				"x": 6,
-				"y": 8,
+				"y": 12,
 				"w": 3,
-				"h": 4,
+				"h": 3,
 				"name": "Total Packets Number Distributed",
 				"queries": [
 					{
-						"query": "SELECT \"tot_pkts_num_distributed\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"tot_pkts_num_distributed\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -149,7 +281,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"tot_pkts_num_distributed\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"tot_pkts_num_distributed\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -242,19 +374,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/97c93e38-b408-43a8-b137-5247451095ea"
+					"self": "/chronograf/v1/dashboards/21/cells/5dbbd3e2-f54d-42f0-9bce-33ba3cd9a127"
 				}
 			},
 			{
-				"i": "0dba23a4-aefa-47c0-8fff-8d9087ea44f1",
-				"x": 3,
+				"i": "b6043827-0555-4145-aa86-5fadda102cf3",
+				"x": 6,
 				"y": 8,
 				"w": 3,
 				"h": 4,
 				"name": "Total Packets Size Dropped",
 				"queries": [
 					{
-						"query": "SELECT \"tot_pkts_size_dropped\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"tot_pkts_size_dropped\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -266,7 +398,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"tot_pkts_size_dropped\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"tot_pkts_size_dropped\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -359,19 +491,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/0dba23a4-aefa-47c0-8fff-8d9087ea44f1"
+					"self": "/chronograf/v1/dashboards/21/cells/b6043827-0555-4145-aa86-5fadda102cf3"
 				}
 			},
 			{
-				"i": "ae3868d6-e314-4614-a83e-13408c6797eb",
+				"i": "609f77de-87d5-472e-a76b-183ef1a215d8",
 				"x": 6,
 				"y": 4,
-				"w": 3,
+				"w": 6,
 				"h": 4,
 				"name": "Packets Number Declined",
 				"queries": [
 					{
-						"query": "SELECT \"pkts_num_declined\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"pkts_num_declined\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -383,7 +515,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"pkts_num_declined\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"pkts_num_declined\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -476,19 +608,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/ae3868d6-e314-4614-a83e-13408c6797eb"
+					"self": "/chronograf/v1/dashboards/21/cells/609f77de-87d5-472e-a76b-183ef1a215d8"
 				}
 			},
 			{
-				"i": "c8b1806f-5352-4661-8cfb-9cb10c8eabc8",
+				"i": "60f07d0a-d633-4027-91e4-9c27aa68a47e",
 				"x": 9,
-				"y": 4,
+				"y": 8,
 				"w": 3,
 				"h": 4,
 				"name": "Packets Size Declined",
 				"queries": [
 					{
-						"query": "SELECT \"pkts_size_declined\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"pkts_size_declined\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -500,7 +632,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"pkts_size_declined\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"pkts_size_declined\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -593,19 +725,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/c8b1806f-5352-4661-8cfb-9cb10c8eabc8"
+					"self": "/chronograf/v1/dashboards/21/cells/60f07d0a-d633-4027-91e4-9c27aa68a47e"
 				}
 			},
 			{
-				"i": "ff8e2e6b-2b4a-44da-9787-1867bc5dea5b",
+				"i": "624155b6-df19-443c-9c12-89689b5af9cb",
 				"x": 0,
-				"y": 8,
-				"w": 3,
-				"h": 4,
+				"y": 9,
+				"w": 6,
+				"h": 6,
 				"name": "Total Packets Number Dropped",
 				"queries": [
 					{
-						"query": "SELECT \"tot_pkts_num_dropped\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"tot_pkts_num_dropped\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -617,7 +749,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"tot_pkts_num_dropped\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"tot_pkts_num_dropped\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -710,19 +842,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/ff8e2e6b-2b4a-44da-9787-1867bc5dea5b"
+					"self": "/chronograf/v1/dashboards/21/cells/624155b6-df19-443c-9c12-89689b5af9cb"
 				}
 			},
 			{
-				"i": "1e31be35-7ebb-4325-bc6b-a26c8fc7e6d7",
-				"x": 3,
-				"y": 4,
-				"w": 3,
-				"h": 4,
+				"i": "37928804-c603-4ce3-9ad4-3ab627ff1707",
+				"x": 0,
+				"y": 15,
+				"w": 6,
+				"h": 3,
 				"name": "Packets Size Request",
 				"queries": [
 					{
-						"query": "SELECT \"pkts_size_request\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"pkts_size_request\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -734,7 +866,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"pkts_size_request\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"pkts_size_request\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -827,11 +959,11 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/1e31be35-7ebb-4325-bc6b-a26c8fc7e6d7"
+					"self": "/chronograf/v1/dashboards/21/cells/37928804-c603-4ce3-9ad4-3ab627ff1707"
 				}
 			},
 			{
-				"i": "92679f5f-9c43-4abd-b38e-c0239f6a7225",
+				"i": "688e1195-b992-4e16-a121-4c7ebd6b19a1",
 				"x": 6,
 				"y": 0,
 				"w": 3,
@@ -839,7 +971,7 @@
 				"name": "Packets Number Granted",
 				"queries": [
 					{
-						"query": "SELECT \"pkts_num_granted\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"pkts_num_granted\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -851,7 +983,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"pkts_num_granted\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"pkts_num_granted\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -944,11 +1076,11 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/92679f5f-9c43-4abd-b38e-c0239f6a7225"
+					"self": "/chronograf/v1/dashboards/21/cells/688e1195-b992-4e16-a121-4c7ebd6b19a1"
 				}
 			},
 			{
-				"i": "b40f8fca-03f8-494d-a36d-a1f4d7fdf7b5",
+				"i": "7d01d1a9-d224-4a08-9ba4-3a567723f8c0",
 				"x": 9,
 				"y": 0,
 				"w": 3,
@@ -956,7 +1088,7 @@
 				"name": "Packets Size Granted",
 				"queries": [
 					{
-						"query": "SELECT \"pkts_size_granted\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"pkts_size_granted\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -968,7 +1100,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"pkts_size_granted\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"pkts_size_granted\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -1061,19 +1193,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/b40f8fca-03f8-494d-a36d-a1f4d7fdf7b5"
+					"self": "/chronograf/v1/dashboards/21/cells/7d01d1a9-d224-4a08-9ba4-3a567723f8c0"
 				}
 			},
 			{
-				"i": "a3e0aa96-a25f-4d8f-b35e-71f8b308ff01",
+				"i": "50502405-b512-4409-a7de-e2f2dc6ce861",
 				"x": 0,
-				"y": 4,
+				"y": 5,
 				"w": 3,
 				"h": 4,
 				"name": "Packets Number Request",
 				"queries": [
 					{
-						"query": "SELECT \"pkts_num_request\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"pkts_num_request\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -1085,7 +1217,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"pkts_num_request\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"pkts_num_request\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -1178,19 +1310,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/a3e0aa96-a25f-4d8f-b35e-71f8b308ff01"
+					"self": "/chronograf/v1/dashboards/21/cells/50502405-b512-4409-a7de-e2f2dc6ce861"
 				}
 			},
 			{
-				"i": "879a0aa2-c101-45f9-a113-f8d07ef21dc4",
+				"i": "a9e438d2-d78e-4fed-bdf9-93f7dcf13f6d",
 				"x": 0,
 				"y": 0,
-				"w": 3,
-				"h": 4,
+				"w": 6,
+				"h": 5,
 				"name": "Total Packets Number",
 				"queries": [
 					{
-						"query": "SELECT \"tot_pkts_num\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"tot_pkts_num\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -1202,7 +1334,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"tot_pkts_num\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"tot_pkts_num\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -1295,19 +1427,19 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/879a0aa2-c101-45f9-a113-f8d07ef21dc4"
+					"self": "/chronograf/v1/dashboards/21/cells/a9e438d2-d78e-4fed-bdf9-93f7dcf13f6d"
 				}
 			},
 			{
-				"i": "7a7827b7-bb24-4fcd-85ae-681948197dc4",
+				"i": "d97c4854-e810-4e7e-9b9b-9b8bdd6defc3",
 				"x": 3,
-				"y": 0,
+				"y": 5,
 				"w": 3,
 				"h": 4,
 				"name": "Total Packets Size",
 				"queries": [
 					{
-						"query": "SELECT \"tot_pkts_size\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+						"query": "SELECT \"tot_pkts_size\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 						"queryConfig": {
 							"database": "",
 							"measurement": "",
@@ -1319,7 +1451,7 @@
 								"tags": []
 							},
 							"areTagsAccepted": false,
-							"rawText": "SELECT \"tot_pkts_size\" FROM \"telegraf\".\"monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
+							"rawText": "SELECT \"tot_pkts_size\" FROM \"gkle\".\"gkle_monitor\".\"gkle\" WHERE host = :host: AND time > :dashboardTime: AND time < :upperDashboardTime:",
 							"range": null,
 							"shifts": null
 						},
@@ -1412,7 +1544,7 @@
 				"note": "",
 				"noteVisibility": "default",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/cells/7a7827b7-bb24-4fcd-85ae-681948197dc4"
+					"self": "/chronograf/v1/dashboards/21/cells/d97c4854-e810-4e7e-9b9b-9b8bdd6defc3"
 				}
 			}
 		],
@@ -1431,23 +1563,23 @@
 				"label": "",
 				"query": {
 					"influxql": "SHOW TAG VALUES ON :database: FROM :measurement: WITH KEY=:tagKey:",
-					"db": "telegraf",
+					"db": "gkle",
 					"measurement": "gkle",
 					"tagKey": "host",
 					"fieldKey": ""
 				},
 				"sourceID": "dynamic",
 				"links": {
-					"self": "/chronograf/v1/dashboards/3/templates/68c6d7ec-ac1e-4110-ac32-d9ad25cd9c00"
+					"self": "/chronograf/v1/dashboards/21/templates/68c6d7ec-ac1e-4110-ac32-d9ad25cd9c00"
 				}
 			}
 		],
 		"name": "Gatekeeper Logs",
 		"organization": "default",
 		"links": {
-			"self": "/chronograf/v1/dashboards/3",
-			"cells": "/chronograf/v1/dashboards/3/cells",
-			"templates": "/chronograf/v1/dashboards/3/templates"
+			"self": "/chronograf/v1/dashboards/21",
+			"cells": "/chronograf/v1/dashboards/21/cells",
+			"templates": "/chronograf/v1/dashboards/21/templates"
 		}
 	}
 }
