@@ -266,7 +266,7 @@ func aggregate(entries map[int]exporter.Entry) (time.Time, exporter.Measurements
 }
 
 func saveLastLog(logFile string) error {
-	dir, err := os.Open(filepath.Dir(lastLogFile))
+	dir, err := os.OpenFile(filepath.Dir(lastLogFile), os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		return fmt.Errorf("open directory failed: %w", err)
 	}
