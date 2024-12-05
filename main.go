@@ -33,7 +33,7 @@ func main() {
 func run() int {
 	cfg, err := parseConfig()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error reading config file: %v\n", err)
+		slog.Error(fmt.Sprintf("error reading config file: %v\n", err))
 		return 1
 	}
 
@@ -46,7 +46,7 @@ func run() int {
 
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error creating fsnotify watcher: %v\n", err)
+		slog.Error(fmt.Sprintf("error creating fsnotify watcher: %v\n", err))
 		return 1
 	}
 	defer watcher.Close()
@@ -62,7 +62,7 @@ func run() int {
 				if event.Op&fsnotify.Create == fsnotify.Create {
 					filesToParse, err := getFilesToParse(cfg.GkLogDir)
 					if err != nil {
-						fmt.Fprintf(os.Stderr, "error getting log files to parse: %v", err)
+						slog.Error(fmt.Sprintf("error getting log files to parse: %v", err))
 						return
 					}
 
@@ -72,7 +72,7 @@ func run() int {
 						ex.Close()
 
 						if err := saveLastLog(file); err != nil {
-							fmt.Fprintf(os.Stderr, "error saving last read log: %v", err)
+							slog.Error(fmt.Sprintf("error saving last read log: %v", err))
 							return
 						}
 					}
@@ -81,14 +81,14 @@ func run() int {
 				if !ok {
 					return
 				}
-				fmt.Fprintf(os.Stderr, "error while watching log dir: %v\n", err)
+				slog.Error(fmt.Sprintf("error while watching log dir: %v\n", err))
 			}
 		}
 	}()
 
 	err = watcher.Add(cfg.GkLogDir)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error adding watcher to log dir: %s. %v\n", cfg.GkLogDir, err)
+		slog.Error(fmt.Sprintf("error adding watcher to log dir: %s. %v\n", cfg.GkLogDir, err))
 		return 1
 	}
 	<-done
