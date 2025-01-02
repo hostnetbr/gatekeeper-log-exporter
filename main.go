@@ -266,7 +266,11 @@ func aggregate(entries map[int]exporter.Entry) (time.Time, exporter.Measurements
 }
 
 func saveLastLog(logFile string) error {
-	dir, err := os.OpenFile(filepath.Dir(lastLogFile), os.O_RDWR|os.O_CREATE, 0755)
+	err := os.Mkdir(filepath.Dir(lastLogFile), 755)
+	if err != nil && !os.IsExist(err) {
+		return fmt.Errorf("create directory failed: %w", err)
+	}
+	dir, err := os.Open(filepath.Dir(lastLogFile))
 	if err != nil {
 		return fmt.Errorf("open directory failed: %w", err)
 	}
